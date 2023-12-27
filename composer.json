@@ -1,0 +1,38 @@
+{
+    "name": "mr-vaco/orchid-blog-plugin",
+    "description": "Blog plugin for Orchid Admin Panel",
+    "keywords": [
+        "orchid blog",
+        "orchid posts"
+    ],
+    "license": "MIT",
+    "type": "plugin",
+    "homepage": "https://github.com/MrVACO/orchid-blog-plugin",
+    "authors": [
+        {
+            "name": "Artem Mr.VACO Feoktistov"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "mr-vaco/helper-code-for-laravel": "@dev",
+        "mr-vaco/orchid-statuses-manager-plugin": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "MrVaco\\OrchidBlog\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MrVaco\\OrchidBlog\\BlogServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

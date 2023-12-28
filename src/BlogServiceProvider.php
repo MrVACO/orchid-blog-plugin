@@ -3,8 +3,10 @@
 namespace MrVaco\OrchidBlog;
 
 use MrVaco\HelperCode\Classes\Migrations;
+use MrVaco\OrchidBlog\Enums\BlogEnums;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\OrchidServiceProvider;
+use Orchid\Screen\Actions\Menu;
 
 class BlogServiceProvider extends OrchidServiceProvider
 {
@@ -14,6 +16,17 @@ class BlogServiceProvider extends OrchidServiceProvider
 
         $this->publish();
         $this->router();
+    }
+
+    public function menu(): array
+    {
+        return [
+            Menu::make(__('Posts'))
+                ->title(__('Blog'))
+                ->route(BlogEnums::postView)
+                ->active(BlogEnums::prefix . '*')
+                ->sort(100),
+        ];
     }
 
     public function router(): void

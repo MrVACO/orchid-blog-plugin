@@ -3,9 +3,12 @@
 namespace MrVaco\OrchidBlog\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 class Post extends Model
 {
+    use AsSource;
+
     protected $table = 'mr_vaco__blog_posts';
 
     protected $fillable = [

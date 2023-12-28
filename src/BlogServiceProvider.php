@@ -13,6 +13,15 @@ class BlogServiceProvider extends OrchidServiceProvider
         parent::boot($dashboard);
 
         $this->publish();
+        $this->router();
+    }
+
+    public function router(): void
+    {
+        app('router')
+            ->domain((string) config('platform.domain'))
+            ->prefix(Dashboard::prefix('/'))
+            ->group(__DIR__ . '/../routes/web.php');
     }
 
     protected function publish(): void

@@ -25,10 +25,15 @@ class BlogServiceProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
-            Menu::make(__('Posts'))
-                ->title(__('Blog'))
+            Menu::make(__(BlogEnums::prefixPlugin . '::plugin_blog.posts'))
+                ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.plugin_category'))
                 ->route(BlogEnums::postView)
-                ->active(BlogEnums::prefix . '*')
+                ->active(BlogEnums::prefix . 'posts.*')
+                ->sort(100),
+
+            Menu::make(__(BlogEnums::prefixPlugin . '::plugin_blog.categories'))
+                ->route(BlogEnums::categoryView)
+                ->active(BlogEnums::prefix . 'categories.*')
                 ->sort(100),
         ];
     }

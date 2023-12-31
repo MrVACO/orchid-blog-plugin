@@ -3,6 +3,7 @@
 namespace MrVaco\OrchidBlog\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Screen\AsSource;
 
 class Post extends Model
@@ -35,4 +36,9 @@ class Post extends Model
         'published_at' => 'datetime',
         'recommended'  => 'boolean',
     ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

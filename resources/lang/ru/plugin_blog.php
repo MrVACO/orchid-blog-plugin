@@ -3,16 +3,25 @@
 declare(strict_types = 1);
 
 return [
-    "category"       => "Блог",
-    "posts"          => "Посты",
-    "post"           => "Пост",
-    'confirm_delete' => 'Элемент будет удалён без возможности восстановления',
-    'create'         => 'Добавить элемент',
-    'deleted'        => 'Элемент удалён',
-    'removed'        => 'Элемент удалён',
-    'saved'          => 'Элемент сохранён',
-    'update :name'   => 'Редактирование: :name',
-    'update'         => 'Редактирование',
+    "categories"      => "Категории",
+    "category"        => "Категория",
+    "plugin_category" => "Блог",
+    "post"            => "Пост",
+    "posts"           => "Посты",
+    'confirm_delete'  => 'Элемент будет удалён без возможности восстановления',
+    'content'         => 'Полный текст',
+    'create category' => 'Добавить категорию',
+    'create post'     => 'Добавить пост',
+    'deleted'         => 'Элемент удалён',
+    'image'           => 'Изображение',
+    'introductory'    => 'Вводный текст',
+    'keywords'        => 'Ключевые слова',
+    'published_at'    => 'Опубликовано',
+    'recommended'     => 'Рекомендуемый',
+    'removed'         => 'Элемент удалён',
+    'saved'           => 'Элемент сохранён',
+    'update :name'    => 'Редактирование: :name',
+    'update'          => 'Редактирование',
 
     'permissions' => [
         'post'     => [

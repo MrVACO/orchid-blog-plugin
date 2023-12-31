@@ -3,9 +3,12 @@
 namespace MrVaco\OrchidBlog\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 class Category extends Model
 {
+    use AsSource;
+
     protected $table = 'mr_vaco__blog_categories';
 
     protected $fillable = [

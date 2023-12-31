@@ -6,6 +6,7 @@ namespace MrVaco\OrchidBlog\Tables;
 
 use MrVaco\OrchidBlog\Enums\BlogEnums;
 use MrVaco\OrchidBlog\Models\Post;
+use MrVaco\OrchidHelperCode\Screens\Tables\TDBoolean;
 use MrVaco\OrchidStatusesManager\Classes\StatusClass;
 use MrVaco\OrchidStatusesManager\Enums\StatusEnum;
 use Orchid\Screen\Actions\Button;
@@ -37,7 +38,10 @@ class PostsTable
             TD::make('image', __('Image'))
                 ->defaultHidden(),
 
-            TD::make('recommended', __(BlogEnums::prefixPlugin . '::plugin_blog.recommended')),
+            TDBoolean::make('recommended', __(BlogEnums::prefixPlugin . '::plugin_blog.recommended'))
+                ->sort()
+                ->width('150px')
+                ->alignCenter(),
 
             TD::make('published_at', __(BlogEnums::prefixPlugin . '::plugin_blog.published_at'))
                 ->usingComponent(DateTimeSplit::class)

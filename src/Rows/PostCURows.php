@@ -105,7 +105,8 @@ class PostCURows extends Rows
                 ->format24hr(),
 
             CheckBox::make('post.recommended')
-                ->value(0)
+                ->value(false)
+                ->sendTrueOrFalse()
                 ->placeholder(BlogEnums::prefixPlugin . '::plugin_blog.recommended'),
         ];
     }

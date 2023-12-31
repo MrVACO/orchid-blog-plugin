@@ -16,6 +16,7 @@
     "require": {
         "php": "^8.0",
         "mr-vaco/helper-code-for-laravel": "@dev",
+        "mr-vaco/orchid-helper-code": "@dev",
         "mr-vaco/orchid-statuses-manager-plugin": "@dev"
     },
     "autoload": {

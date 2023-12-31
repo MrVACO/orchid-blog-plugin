@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace MrVaco\OrchidBlog\Enums;
 
+use Orchid\Platform\ItemPermission;
+
 enum BlogEnums
 {
     const author = 'mr_vaco';
@@ -25,4 +27,17 @@ enum BlogEnums
     const categoryCreate = self::prefix . 'categories.' . self::postfixCreate;
     const categoryUpdate = self::prefix . 'categories.' . self::postfixUpdate;
     const categoryDelete = self::prefix . 'categories.' . self::postfixDelete;
+
+    static public function permissions()
+    {
+        return ItemPermission::group(__(self::prefixPlugin . '::plugin_blog.category'))
+            ->addPermission(self::postView, __(self::prefixPlugin . '::plugin_blog.permissions.post.view'))
+            ->addPermission(self::postCreate, __(self::prefixPlugin . '::plugin_blog.permissions.post.create'))
+            ->addPermission(self::postUpdate, __(self::prefixPlugin . '::plugin_blog.permissions.post.update'))
+            ->addPermission(self::postDelete, __(self::prefixPlugin . '::plugin_blog.permissions.post.delete'))
+            ->addPermission(self::categoryView, __(self::prefixPlugin . '::plugin_blog.permissions.category.view'))
+            ->addPermission(self::categoryCreate, __(self::prefixPlugin . '::plugin_blog.permissions.category.create'))
+            ->addPermission(self::categoryUpdate, __(self::prefixPlugin . '::plugin_blog.permissions.category.update'))
+            ->addPermission(self::categoryDelete, __(self::prefixPlugin . '::plugin_blog.permissions.category.delete'));
+    }
 }

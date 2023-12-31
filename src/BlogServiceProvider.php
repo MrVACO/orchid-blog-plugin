@@ -2,6 +2,7 @@
 
 namespace MrVaco\OrchidBlog;
 
+use Illuminate\Support\Facades\Lang;
 use MrVaco\HelperCode\Classes\Migrations;
 use MrVaco\OrchidBlog\Enums\BlogEnums;
 use Orchid\Platform\Dashboard;
@@ -12,6 +13,9 @@ class BlogServiceProvider extends OrchidServiceProvider
 {
     public function boot(Dashboard $dashboard): void
     {
+        Lang::addNamespace(BlogEnums::prefixPlugin, __DIR__ . '/../resources/lang');
+
+        $dashboard->registerPermissions(BlogEnums::permissions());
         parent::boot($dashboard);
 
         $this->publish();

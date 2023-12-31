@@ -56,6 +56,7 @@ class BlogServiceProvider extends OrchidServiceProvider
         $this->publishes([
             __DIR__ . '/../migrations/create_blog_posts_table.php'      => Migrations::getMigrationFileName('create_blog_posts_table.php'),
             __DIR__ . '/../migrations/create_blog_categories_table.php' => Migrations::getMigrationFileName('create_blog_categories_table.php'),
+            __DIR__ . '/../migrations/fill_blog_categories_table.php'   => Migrations::getMigrationFileName('fill_blog_categories_table.php'),
         ], 'plugin-migrations');
     }
 }

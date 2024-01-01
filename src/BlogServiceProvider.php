@@ -31,14 +31,16 @@ class BlogServiceProvider extends OrchidServiceProvider
         return [
             Menu::make(__(BlogEnums::prefixPlugin . '::plugin_blog.posts'))
                 ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.plugin_category'))
+                ->icon('bs.newspaper')
                 ->route(BlogEnums::postView)
                 ->active(BlogEnums::prefix . 'posts.*')
-                ->sort(100),
+                ->sort(90),
 
             Menu::make(__(BlogEnums::prefixPlugin . '::plugin_blog.categories'))
+                ->icon('bs.card-list')
                 ->route(BlogEnums::categoryView)
                 ->active(BlogEnums::prefix . 'categories.*')
-                ->sort(100),
+                ->sort(90),
         ];
     }
 

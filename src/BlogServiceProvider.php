@@ -5,6 +5,8 @@ namespace MrVaco\OrchidBlog;
 use Illuminate\Support\Facades\Lang;
 use MrVaco\HelperCode\Classes\Migrations;
 use MrVaco\OrchidBlog\Enums\BlogEnums;
+use MrVaco\OrchidBlog\Models\Post;
+use MrVaco\OrchidBlog\Observers\PostObserver;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Screen\Actions\Menu;
@@ -20,6 +22,8 @@ class BlogServiceProvider extends OrchidServiceProvider
 
         $this->publish();
         $this->router();
+
+        Post::observe(PostObserver::class);
     }
 
     public function menu(): array

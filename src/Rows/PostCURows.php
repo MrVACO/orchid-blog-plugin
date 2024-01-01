@@ -9,15 +9,17 @@ use MrVaco\OrchidBlog\Models\Category;
 use MrVaco\OrchidStatusesManager\Classes\StatusClass;
 use MrVaco\OrchidStatusesManager\Models\StatusModel;
 use Orchid\Screen\Fields\CheckBox;
+use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Relation;
-use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
 
 class PostCURows extends Rows
 {
+    const style_width = 'width:100%; max-width:100%';
+
     protected function fields(): iterable
     {
         return [
@@ -26,67 +28,32 @@ class PostCURows extends Rows
                 ->type('text')
                 ->max(255)
                 ->required()
-                ->horizontal(),
+                ->style(self::style_width),
 
             Input::make('post.slug')
                 ->title(__('Slug'))
                 ->type('text')
                 ->max(255)
-                ->required()
-                ->horizontal(),
+                ->style(self::style_width),
 
             Input::make('post.keywords')
                 ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.keywords'))
                 ->type('text')
                 ->max(255)
-                ->horizontal(),
+                ->style(self::style_width),
 
             Input::make('post.tags')
                 ->title(__('Tags'))
                 ->type('text')
                 ->max(255)
-                ->horizontal(),
-
-            Upload::make('post.images')
-                ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.image'))
-                ->media()
-                ->groups('blog'),
+                ->style(self::style_width),
 
             Input::make('post.creator_id')->value(auth()->user()->id)->hidden(),
             Input::make('post.updator_id')->value(auth()->user()->id)->hidden(),
         ];
     }
 
-    static public function fieldsTabs(int $id): iterable
-    {
-        switch ($id)
-        {
-            case 1:
-            {
-                return [
-                    Quill::make('post.introductory')
-                        ->type('text')
-                        ->max(255)
-                        ->height('200px'),
-                ];
-            }
-            case 2:
-            {
-                return [
-                    Quill::make('post.content')
-                        ->type('text')
-                        ->max(255)
-                        ->height('600px'),
-                ];
-            }
-            default:
-            {
-                return [];
-            }
-        }
-    }
-
-    static public function fieldsSecondary(): iterable
+    static public function fieldsSecondary(): array
     {
         return [
             Relation::make('post.category_id')
@@ -106,9 +73,35 @@ class PostCURows extends Rows
                 ->enableTime(),
 
             CheckBox::make('post.recommended')
+                ->title(BlogEnums::prefixPlugin . '::plugin_blog.recommended')
                 ->value(false)
                 ->sendTrueOrFalse()
-                ->placeholder(BlogEnums::prefixPlugin . '::plugin_blog.recommended'),
+                ->placeholder(__('Yes')),
+        ];
+    }
+
+    static public function fieldsAfter(): array
+    {
+        return [
+            Cropper::make('post.image')
+                ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.image'))
+                ->minCanvas(300)
+                ->maxCanvas(450)
+                ->targetId(),
+
+            Quill::make('post.introductory')
+                ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.introductory'))
+                ->type('text')
+                ->max(255)
+                ->height('200px')
+                ->required(),
+
+            Quill::make('post.content')
+                ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.content'))
+                ->type('text')
+                ->max(255)
+                ->height('600px')
+                ->required(),
         ];
     }
 }

@@ -4,11 +4,12 @@ namespace MrVaco\OrchidBlog\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Orchid\Attachment\Attachable;
 use Orchid\Screen\AsSource;
 
 class Post extends Model
 {
-    use AsSource;
+    use AsSource, Attachable;
 
     protected $table = 'mr_vaco__blog_posts';
 
@@ -31,6 +32,7 @@ class Post extends Model
     protected $casts = [
         'category_id'  => 'integer',
         'status'       => 'integer',
+        'image'        => 'integer',
         'creator_id'   => 'integer',
         'updator_id'   => 'integer',
         'published_at' => 'datetime',

@@ -56,28 +56,31 @@ trait PostCUTrait
         return [
             Layout::split([
                 PostCURows::class,
-                Layout::rows((array) PostCURows::fieldsSecondary()),
+                Layout::rows(PostCURows::fieldsSecondary()),
             ])->ratio('70/30'),
 
-            Layout::tabs([
-                __(BlogEnums::prefixPlugin . '::plugin_blog.introductory') => Layout::rows((array) PostCURows::fieldsTabs(1)),
-                __(BlogEnums::prefixPlugin . '::plugin_blog.content')      => Layout::rows((array) PostCURows::fieldsTabs(2)),
-            ]),
+            Layout::rows(PostCURows::fieldsAfter()),
         ];
     }
 
     public function save(Post $post, Request $request): RedirectResponse
     {
-        $request->validate([
-            'post.title' => [
+        $validator = $request->validate([
+            'post.title'        => [
                 'required',
             ],
-            'post.slug' => [
+            'post.introductory' => [
+                'required',
+            ],
+            'post.content'      => [
                 'required',
             ],
         ]);
 
         $post->fill($request->collect('post')->toArray())->save();
+        $post->attachment()->syncWithoutDetaching(
+            $request->input('post.image', [])
+        );
 
         Toast::success(__(BlogEnums::prefixPlugin . '::plugin_blog.saved'));
 

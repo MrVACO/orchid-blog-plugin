@@ -10,7 +10,6 @@ use MrVaco\OrchidStatusesManager\Classes\StatusClass;
 use MrVaco\OrchidStatusesManager\Models\StatusModel;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\DateTimer;
-use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Relation;
@@ -22,31 +21,31 @@ class PostCURows extends Rows
     protected function fields(): iterable
     {
         return [
-            Group::make([
-                Input::make('post.title')
-                    ->title(__('Name'))
-                    ->type('text')
-                    ->max(255)
-                    ->required(),
+            Input::make('post.title')
+                ->title(__('Name'))
+                ->type('text')
+                ->max(255)
+                ->required()
+                ->horizontal(),
 
-                Input::make('post.slug')
-                    ->title(__('Slug'))
-                    ->type('text')
-                    ->max(255)
-                    ->required(),
-            ]),
+            Input::make('post.slug')
+                ->title(__('Slug'))
+                ->type('text')
+                ->max(255)
+                ->required()
+                ->horizontal(),
 
-            Group::make([
-                Input::make('post.keywords')
-                    ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.keywords'))
-                    ->type('text')
-                    ->max(255),
+            Input::make('post.keywords')
+                ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.keywords'))
+                ->type('text')
+                ->max(255)
+                ->horizontal(),
 
-                Input::make('post.tags')
-                    ->title(__('Tags'))
-                    ->type('text')
-                    ->max(255),
-            ]),
+            Input::make('post.tags')
+                ->title(__('Tags'))
+                ->type('text')
+                ->max(255)
+                ->horizontal(),
 
             Upload::make('post.images')
                 ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.image'))
@@ -77,7 +76,7 @@ class PostCURows extends Rows
                     Quill::make('post.content')
                         ->type('text')
                         ->max(255)
-                        ->height('200px'),
+                        ->height('600px'),
                 ];
             }
             default:
@@ -93,6 +92,7 @@ class PostCURows extends Rows
             Relation::make('post.category_id')
                 ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.category'))
                 ->fromModel(Category::class, 'name')
+                ->applyScope('active')
                 ->value(1),
 
             Relation::make('post.status')
@@ -102,7 +102,8 @@ class PostCURows extends Rows
 
             DateTimer::make('post.published_at')
                 ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.published_at'))
-                ->format24hr(),
+                ->format24hr()
+                ->enableTime(),
 
             CheckBox::make('post.recommended')
                 ->value(false)

@@ -2,7 +2,9 @@
 
 namespace MrVaco\OrchidBlog\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use MrVaco\OrchidStatusesManager\Classes\StatusClass;
 use Orchid\Screen\AsSource;
 
 class Category extends Model
@@ -30,4 +32,11 @@ class Category extends Model
         'updator_id' => 'integer',
         'hidden'     => 'boolean',
     ];
+
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query
+            ->where('status', StatusClass::ACTIVE()->id)
+            ->where('hidden', false);
+    }
 }

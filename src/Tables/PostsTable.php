@@ -20,13 +20,12 @@ class PostsTable
     static public function columns(): array
     {
         return [
-            TD::make('title', __('Title'))
+            TD::make('title', __('Name'))
+                ->width(400)
                 ->cantHide(),
 
-            TD::make('slug', __('Slug'))
-                ->defaultHidden(),
-
             TD::make('category', __(BlogEnums::prefixPlugin . '::plugin_blog.category'))
+                ->alignCenter()
                 ->render(fn ($post) => $post->category->name),
 
             TD::make('status', __('Status'))

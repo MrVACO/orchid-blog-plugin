@@ -30,7 +30,7 @@ enum BlogEnums
 
     static public function permissions()
     {
-        return ItemPermission::group(__(self::prefixPlugin . '::plugin_blog.category'))
+        return ItemPermission::group(__(self::prefixPlugin . '::plugin_blog.plugin_category'))
             ->addPermission(self::postView, __(self::prefixPlugin . '::plugin_blog.permissions.post.view'))
             ->addPermission(self::postCreate, __(self::prefixPlugin . '::plugin_blog.permissions.post.create'))
             ->addPermission(self::postUpdate, __(self::prefixPlugin . '::plugin_blog.permissions.post.update'))

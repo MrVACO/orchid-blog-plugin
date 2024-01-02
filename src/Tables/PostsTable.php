@@ -21,8 +21,10 @@ class PostsTable
     {
         return [
             TD::make('title', __('Name'))
+                ->class('text-truncate')
                 ->width(400)
-                ->cantHide(),
+                ->cantHide()
+                ->render(fn ($post) => Link::make($post->title)->route(BlogEnums::postUpdate, $post->id)),
 
             TD::make('category', __(BlogEnums::prefixPlugin . '::plugin_blog.category'))
                 ->alignCenter()

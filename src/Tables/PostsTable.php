@@ -6,9 +6,9 @@ namespace MrVaco\OrchidBlog\Tables;
 
 use MrVaco\OrchidBlog\Enums\BlogEnums;
 use MrVaco\OrchidBlog\Models\Post;
-use MrVaco\OrchidHelperCode\Screens\Tables\TDBoolean;
-use MrVaco\OrchidStatusesManager\Classes\StatusClass;
-use MrVaco\OrchidStatusesManager\Enums\StatusEnum;
+use MrVaco\OrchidHelperCode\Components\TDBooleanComponent;
+use MrVaco\OrchidStatuses\Classes\StatusClass;
+use MrVaco\OrchidStatuses\Enums\StatusEnum;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -37,8 +37,8 @@ class PostsTable
             TD::make('image', __('Image'))
                 ->defaultHidden(),
 
-            TDBoolean::make('recommended', __(BlogEnums::prefixPlugin . '::plugin_blog.recommended'))
-                ->sort()
+            TD::make('recommended', __(BlogEnums::prefixPlugin . '::plugin_blog.recommended'))
+                ->usingComponent(TDBooleanComponent::class)
                 ->width('150px')
                 ->alignCenter(),
 

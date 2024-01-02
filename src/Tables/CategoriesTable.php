@@ -6,8 +6,8 @@ namespace MrVaco\OrchidBlog\Tables;
 
 use MrVaco\OrchidBlog\Enums\BlogEnums;
 use MrVaco\OrchidBlog\Models\Category;
-use MrVaco\OrchidStatusesManager\Classes\StatusClass;
-use MrVaco\OrchidStatusesManager\Enums\StatusEnum;
+use MrVaco\OrchidStatuses\Classes\StatusClass;
+use MrVaco\OrchidStatuses\Enums\StatusEnum;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;

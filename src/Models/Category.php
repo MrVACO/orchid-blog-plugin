@@ -5,7 +5,7 @@ namespace MrVaco\OrchidBlog\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use MrVaco\OrchidStatusesManager\Classes\StatusClass;
+use MrVaco\OrchidStatuses\Classes\StatusClass;
 use Orchid\Screen\AsSource;
 
 class Category extends Model

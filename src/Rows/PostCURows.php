@@ -6,8 +6,8 @@ namespace MrVaco\OrchidBlog\Rows;
 
 use MrVaco\OrchidBlog\Enums\BlogEnums;
 use MrVaco\OrchidBlog\Models\Category;
-use MrVaco\OrchidStatusesManager\Classes\StatusClass;
-use MrVaco\OrchidStatusesManager\Models\StatusModel;
+use MrVaco\OrchidStatuses\Classes\StatusClass;
+use MrVaco\OrchidStatuses\Models\StatusModel;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\DateTimer;

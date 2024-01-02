@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use MrVaco\OrchidBlog\Models\Category;
-use MrVaco\OrchidStatusesManager\Classes\StatusClass;
+use MrVaco\OrchidStatuses\Classes\StatusClass;
 
 return new class extends Migration
 {

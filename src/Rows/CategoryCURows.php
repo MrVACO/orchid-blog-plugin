@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace MrVaco\OrchidBlog\Rows;
 
 use MrVaco\OrchidBlog\Enums\BlogEnums;
-use MrVaco\OrchidStatusesManager\Classes\StatusClass;
-use MrVaco\OrchidStatusesManager\Models\StatusModel;
+use MrVaco\OrchidStatuses\Classes\StatusClass;
+use MrVaco\OrchidStatuses\Models\StatusModel;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;

@@ -28,6 +28,10 @@ class CategoriesTable
             TD::make('tags', __('Tags'))
                 ->defaultHidden(),
 
+            TD::make('posts', __(BlogEnums::prefixPlugin . '::plugin_blog.count_posts'))
+                ->alignCenter()
+                ->render(fn ($category) => count($category->posts)),
+
             TD::make('status', __('Status'))
                 ->alignCenter()
                 ->render(fn ($status) => view(StatusEnum::prefixPlugin . '::status_preview', [

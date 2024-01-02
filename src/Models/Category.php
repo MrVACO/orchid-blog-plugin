@@ -4,6 +4,7 @@ namespace MrVaco\OrchidBlog\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use MrVaco\OrchidStatusesManager\Classes\StatusClass;
 use Orchid\Screen\AsSource;
 
@@ -38,5 +39,10 @@ class Category extends Model
         return $query
             ->where('status', StatusClass::ACTIVE()->id)
             ->where('hidden', false);
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class, 'category_id');
     }
 }

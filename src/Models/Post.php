@@ -5,11 +5,12 @@ namespace MrVaco\OrchidBlog\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Attachment\Attachable;
+use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
 class Post extends Model
 {
-    use AsSource, Attachable;
+    use AsSource, Attachable, Filterable;
 
     protected $table = 'mr_vaco__blog_posts';
 
@@ -37,6 +38,15 @@ class Post extends Model
         'updator_id'   => 'integer',
         'published_at' => 'datetime',
         'recommended'  => 'boolean',
+    ];
+
+    protected array $allowedSorts = [
+        'title',
+        'status',
+        'recommended',
+        'published_at',
+        'created_at',
+        'updated_at',
     ];
 
     public function category(): BelongsTo

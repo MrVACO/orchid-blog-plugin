@@ -19,7 +19,10 @@ class PostsScreen extends Screen
     public function query(): iterable
     {
         return [
-            'posts' => Post::query()->orderByDesc('created_at')->paginate(20)
+            'posts' => Post::query()
+                ->filters()
+                ->defaultSort('created_at', 'desc')
+                ->paginate(20)
         ];
     }
 

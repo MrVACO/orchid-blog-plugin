@@ -24,6 +24,7 @@ class PostsTable
                 ->class('text-truncate')
                 ->width(400)
                 ->cantHide()
+                ->sort()
                 ->render(fn ($post) => Link::make($post->title)->route(BlogEnums::postUpdate, $post->id)),
 
             TD::make('category', __(BlogEnums::prefixPlugin . '::plugin_blog.category'))
@@ -32,6 +33,7 @@ class PostsTable
 
             TD::make('status', __('Status'))
                 ->alignCenter()
+                ->sort()
                 ->render(fn ($status) => view(StatusEnum::prefixPlugin . '::status_preview', [
                     'status' => StatusClass::BY_ID($status->status)
                 ])),
@@ -42,10 +44,12 @@ class PostsTable
             TD::make('recommended', __(BlogEnums::prefixPlugin . '::plugin_blog.recommended'))
                 ->usingComponent(TDBooleanComponent::class)
                 ->width('150px')
+                ->sort()
                 ->alignCenter(),
 
             TD::make('published_at', __(BlogEnums::prefixPlugin . '::plugin_blog.published_at'))
                 ->usingComponent(DateTimeSplit::class)
+                ->sort()
                 ->alignCenter(),
 
             TD::make('created_at', __('Created'))

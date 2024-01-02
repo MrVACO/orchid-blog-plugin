@@ -20,6 +20,7 @@ class CategoriesTable
     {
         return [
             TD::make('name', __('Name'))
+                ->sort()
                 ->cantHide(),
 
             TD::make('slug', __('Slug'))
@@ -34,6 +35,7 @@ class CategoriesTable
 
             TD::make('status', __('Status'))
                 ->alignCenter()
+                ->sort()
                 ->render(fn ($status) => view(StatusEnum::prefixPlugin . '::status_preview', [
                     'status' => StatusClass::BY_ID($status->status)
                 ])),

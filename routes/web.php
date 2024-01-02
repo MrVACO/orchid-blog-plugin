@@ -8,6 +8,7 @@ use MrVaco\OrchidBlog\Screens\CategoryCreateScreen;
 use MrVaco\OrchidBlog\Screens\CategoryUpdateScreen;
 use MrVaco\OrchidBlog\Screens\PostCreateScreen;
 use MrVaco\OrchidBlog\Screens\PostsScreen;
+use MrVaco\OrchidBlog\Screens\PostUpdateScreen;
 use Tabuna\Breadcrumbs\Trail;
 
 app('router')
@@ -40,7 +41,7 @@ app('router')
                     );
 
                 app('router')
-                    ->screen('{post}/update', PostCreateScreen::class)
+                    ->screen('{post}/update', PostUpdateScreen::class)
                     ->name(BlogEnums::postUpdate)
                     ->breadcrumbs(fn (Trail $trail) => $trail
                         ->parent('platform.index')

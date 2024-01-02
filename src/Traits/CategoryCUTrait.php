@@ -40,12 +40,13 @@ trait CategoryCUTrait
 
             Button::make(__('Remove'))
                 ->icon('bs.trash3')
-                ->canSee($this->category->exists)
+                ->canSee($this->category->exists && auth()->user()->hasAccess(BlogEnums::categoryDelete))
                 ->confirm(__(BlogEnums::prefixPlugin . '::plugin_blog.confirm_delete'))
                 ->method('remove'),
 
             Button::make(__('Save'))
                 ->icon('bs.check-circle')
+                ->canSee(auth()->user()->hasAccess(BlogEnums::categoryCreate))
                 ->method('save'),
         ];
     }

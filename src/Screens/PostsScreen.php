@@ -33,6 +33,7 @@ class PostsScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('bs.plus')
+                ->canSee(auth()->user()->hasAccess(BlogEnums::postCreate))
                 ->route(BlogEnums::postCreate),
         ];
     }
@@ -42,6 +43,11 @@ class PostsScreen extends Screen
         return [
             Layout::table('posts', PostsTable::columns())
         ];
+    }
+
+    public function permission(): ?iterable
+    {
+        return [BlogEnums::postView];
     }
 
     public function remove(Request $request): RedirectResponse

@@ -41,12 +41,13 @@ trait PostCUTrait
 
             Button::make(__('Remove'))
                 ->icon('bs.trash3')
-                ->canSee($this->post->exists)
+                ->canSee($this->post->exists && auth()->user()->hasAccess(BlogEnums::postDelete))
                 ->confirm(__(BlogEnums::prefixPlugin . '::plugin_blog.confirm_delete'))
                 ->method('remove'),
 
             Button::make(__('Save'))
                 ->icon('bs.check-circle')
+                ->canSee(auth()->user()->hasAccess(BlogEnums::postCreate))
                 ->method('save'),
         ];
     }
@@ -65,7 +66,7 @@ trait PostCUTrait
 
     public function save(Post $post, Request $request): RedirectResponse
     {
-        $validator = $request->validate([
+        $request->validate([
             'post.title'        => [
                 'required',
             ],

@@ -33,6 +33,7 @@ class CategoriesScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('bs.plus')
+                ->canSee(auth()->user()->hasAccess(BlogEnums::categoryCreate))
                 ->route(BlogEnums::categoryCreate),
         ];
     }
@@ -42,6 +43,11 @@ class CategoriesScreen extends Screen
         return [
             Layout::table('categories', CategoriesTable::columns())
         ];
+    }
+
+    public function permission(): ?iterable
+    {
+        return [BlogEnums::categoryView];
     }
 
     public function remove(Request $request): RedirectResponse

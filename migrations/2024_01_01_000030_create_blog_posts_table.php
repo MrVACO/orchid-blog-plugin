@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('updator_id');
             $table->timestamp('published_at')->nullable();
             $table->boolean('recommended')->default(false);
+            $table->unsignedBigInteger('gallery_id')->nullable();
 
             $table->timestamps();
         });

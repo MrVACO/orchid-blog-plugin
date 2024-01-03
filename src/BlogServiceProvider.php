@@ -4,7 +4,6 @@ namespace MrVaco\OrchidBlog;
 
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
-use MrVaco\HelperCode\Classes\Migrations;
 use MrVaco\OrchidBlog\Enums\BlogEnums;
 use MrVaco\OrchidBlog\Models\Post;
 use MrVaco\OrchidBlog\Observers\PostObserver;
@@ -67,9 +66,7 @@ class BlogServiceProvider extends OrchidServiceProvider
         }
 
         $this->publishes([
-            __DIR__ . '/../migrations/create_blog_posts_table.php'      => Migrations::getMigrationFileName('create_blog_posts_table.php'),
-            __DIR__ . '/../migrations/create_blog_categories_table.php' => Migrations::getMigrationFileName('create_blog_categories_table.php'),
-            __DIR__ . '/../migrations/fill_blog_categories_table.php'   => Migrations::getMigrationFileName('fill_blog_categories_table.php'),
+            __DIR__ . '/../migrations' => database_path('migrations'),
         ], 'plugin-migrations');
     }
 }

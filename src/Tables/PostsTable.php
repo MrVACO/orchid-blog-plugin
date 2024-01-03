@@ -39,7 +39,14 @@ class PostsTable
                 ])),
 
             TD::make('image', __('Image'))
-                ->render(fn ($post) => '<img src="' . $post->attachment()->first()?->url . '" height="50px" />')
+                ->render(function($post)
+                {
+                    $image = $post->attachment()->first();
+
+                    return $image
+                        ? '<img src="' . $image->url . '" height="50px" />'
+                        : '&mdash;';
+                })
                 ->alignCenter()
                 ->defaultHidden(),
 

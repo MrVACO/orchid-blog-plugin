@@ -7,6 +7,7 @@ namespace MrVaco\OrchidBlog\Rows;
 use Carbon\Carbon;
 use MrVaco\OrchidBlog\Enums\BlogEnums;
 use MrVaco\OrchidBlog\Models\Category;
+use MrVaco\OrchidGalleryPlugin\Models\Gallery;
 use MrVaco\OrchidStatuses\Classes\StatusClass;
 use MrVaco\OrchidStatuses\Models\StatusModel;
 use Orchid\Screen\Fields\CheckBox;
@@ -15,6 +16,7 @@ use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Rows;
 
 class PostCURows extends Rows
@@ -104,6 +106,11 @@ class PostCURows extends Rows
     static public function fieldsTabSecond(): array
     {
         return [
+            Select::make('post.gallery_id')
+                ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.gallery'))
+                ->fromQuery(Gallery::query()->active(), 'name')
+                ->empty(__(BlogEnums::prefixPlugin . '::plugin_blog.do_not_specify')),
+
             Cropper::make('post.image')
                 ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.image'))
                 ->minCanvas(300)

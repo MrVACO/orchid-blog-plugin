@@ -4,6 +4,7 @@ namespace MrVaco\OrchidBlog\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use MrVaco\OrchidGalleryPlugin\Models\Gallery;
 use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
@@ -28,6 +29,7 @@ class Post extends Model
         'updator_id',
         'published_at',
         'recommended',
+        'gallery_id'
     ];
 
     protected $casts = [
@@ -38,6 +40,7 @@ class Post extends Model
         'updator_id'   => 'integer',
         'published_at' => 'datetime',
         'recommended'  => 'boolean',
+        'gallery_id'   => 'integer',
     ];
 
     protected array $allowedSorts = [
@@ -52,5 +55,10 @@ class Post extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function gallery(): BelongsTo
+    {
+        return $this->belongsTo(Gallery::class, 'gallery_id');
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use MrVaco\OrchidBlog\Enums\BlogEnums;
 use MrVaco\OrchidBlog\Models\Post;
 use MrVaco\OrchidBlog\Tables\PostsTable;
+use MrVaco\OrchidStatuses\Classes\StatusClass;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
@@ -44,6 +45,8 @@ class PostsScreen extends Screen
     public function layout(): iterable
     {
         return [
+            Layout::view(BlogEnums::prefixPlugin . '::counters-by-status', ['data' => $this->counts()]),
+
             Layout::table('posts', PostsTable::columns())
         ];
     }
@@ -61,5 +64,22 @@ class PostsScreen extends Screen
         Toast::info(__(BlogEnums::prefixPlugin . '::plugin_blog.removed'));
 
         return redirect()->route(BlogEnums::postView);
+    }
+
+    public function counts(): array
+    {
+        $statuses = StatusClass::LIST('base');
+
+        $array_counts = [];
+
+        foreach ($statuses as $key => $value)
+        {
+            $array_counts[$value] = [
+                'count' => Post::query()->where('status', $key)->count(),
+                'color' => StatusClass::BY_ID($key)->color,
+            ];
+        }
+
+        return $array_counts;
     }
 }

@@ -3,6 +3,7 @@
 namespace MrVaco\OrchidBlog;
 
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\View;
 use MrVaco\HelperCode\Classes\Migrations;
 use MrVaco\OrchidBlog\Enums\BlogEnums;
 use MrVaco\OrchidBlog\Models\Post;
@@ -24,6 +25,7 @@ class BlogServiceProvider extends OrchidServiceProvider
         $this->router();
 
         Post::observe(PostObserver::class);
+        View::addNamespace(BlogEnums::prefixPlugin, __DIR__ . '/../resources/views');
     }
 
     public function menu(): array

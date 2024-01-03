@@ -57,8 +57,12 @@ trait PostCUTrait
         return [
             Layout::split([
                 PostCURows::class,
-                Layout::rows(PostCURows::fieldsSecondary()),
-            ])->ratio('70/30'),
+
+                Layout::split([
+                    Layout::rows(PostCURows::fieldsSecondary()),
+                    Layout::rows(PostCURows::fieldsTabSecond()),
+                ])->ratio('60/40'),
+            ])->ratio('50/50'),
 
             Layout::rows(PostCURows::fieldsAfter()),
         ];

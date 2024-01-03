@@ -39,6 +39,8 @@ class PostsTable
                 ])),
 
             TD::make('image', __('Image'))
+                ->render(fn ($post) => '<img src="' . $post->attachment()->first()?->url . '" height="50px" />')
+                ->alignCenter()
                 ->defaultHidden(),
 
             TD::make('recommended', __(BlogEnums::prefixPlugin . '::plugin_blog.recommended'))

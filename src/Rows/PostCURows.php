@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace MrVaco\OrchidBlog\Rows;
 
+use Carbon\Carbon;
 use MrVaco\OrchidBlog\Enums\BlogEnums;
 use MrVaco\OrchidBlog\Models\Category;
 use MrVaco\OrchidStatuses\Classes\StatusClass;
@@ -69,6 +70,7 @@ class PostCURows extends Rows
 
             DateTimer::make('post.published_at')
                 ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.published_at'))
+                ->value(Carbon::now())
                 ->format24hr()
                 ->enableTime(),
 
@@ -83,12 +85,6 @@ class PostCURows extends Rows
     static public function fieldsAfter(): array
     {
         return [
-            Cropper::make('post.image')
-                ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.image'))
-                ->minCanvas(300)
-                ->maxCanvas(450)
-                ->targetId(),
-
             Quill::make('post.introductory')
                 ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.introductory'))
                 ->type('text')
@@ -102,6 +98,19 @@ class PostCURows extends Rows
                 ->max(255)
                 ->height('600px')
                 ->required(),
+        ];
+    }
+
+    static public function fieldsTabSecond(): array
+    {
+        return [
+            Cropper::make('post.image')
+                ->title(__(BlogEnums::prefixPlugin . '::plugin_blog.image'))
+                ->minCanvas(300)
+                ->maxCanvas(450)
+                ->width(450)
+                ->height(300)
+                ->targetId(),
         ];
     }
 }

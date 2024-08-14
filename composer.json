@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "mr-vaco/orchid-status-plugin": "^0.*"
+        "mr-vaco/orchid-status-plugin": "0.*"
     },
     "autoload": {
         "psr-4": {

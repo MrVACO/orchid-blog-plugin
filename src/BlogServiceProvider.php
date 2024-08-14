@@ -1,12 +1,9 @@
 <?php
 
-namespace MrVaco\OrchidBlog;
+namespace MrVaco\Orchid\Blog;
 
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\View;
-use MrVaco\OrchidBlog\Enums\BlogEnums;
-use MrVaco\OrchidBlog\Models\Post;
-use MrVaco\OrchidBlog\Observers\PostObserver;
+use MrVaco\Orchid\Blog\Classes\BlogEnum;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Screen\Actions\Menu;
@@ -15,37 +12,34 @@ class BlogServiceProvider extends OrchidServiceProvider
 {
     public function boot(Dashboard $dashboard): void
     {
-        Lang::addNamespace(BlogEnums::prefixPlugin, __DIR__ . '/../resources/lang');
+        Lang::addJsonPath(__DIR__ . '/../lang');
 
-        $dashboard->registerPermissions(BlogEnums::permissions());
+        $dashboard->registerPermissions(BlogEnum::permissions());
         parent::boot($dashboard);
 
         $this->publish();
         $this->router();
-
-        Post::observe(PostObserver::class);
-        View::addNamespace(BlogEnums::prefixPlugin, __DIR__ . '/../resources/views');
     }
 
     public function menu(): array
     {
-        $title = __(BlogEnums::prefixPlugin . '::plugin_blog.plugin_category');
+        $title = __('Blog');
 
         return [
-            Menu::make(__(BlogEnums::prefixPlugin . '::plugin_blog.posts'))
+            Menu::make(__('Posts'))
                 ->title($title)
                 ->icon('bs.newspaper')
-                ->route(BlogEnums::postView)
-                ->active(BlogEnums::prefix . 'posts.*')
-                ->permission(BlogEnums::postView)
+                ->route(BlogEnum::postView)
+                ->active(BlogEnum::prefix . 'posts.*')
+                ->permission(BlogEnum::postView)
                 ->sort(90),
 
-            Menu::make(__(BlogEnums::prefixPlugin . '::plugin_blog.categories'))
-                ->title(auth()->user()->hasAccess(BlogEnums::postView) ? null : $title)
+            Menu::make(__('Categories'))
+                ->title(auth()->user()->hasAccess(BlogEnum::postView) ? null : $title)
                 ->icon('bs.card-list')
-                ->route(BlogEnums::categoryView)
-                ->active(BlogEnums::prefix . 'categories.*')
-                ->permission(BlogEnums::categoryView)
+                ->route(BlogEnum::categoryView)
+                ->active(BlogEnum::prefix . 'categories.*')
+                ->permission(BlogEnum::categoryView)
                 ->sort(90),
         ];
     }
@@ -61,9 +55,7 @@ class BlogServiceProvider extends OrchidServiceProvider
     protected function publish(): void
     {
         if (!$this->app->runningInConsole())
-        {
             return;
-        }
 
         $this->publishes([
             __DIR__ . '/../migrations' => database_path('migrations'),

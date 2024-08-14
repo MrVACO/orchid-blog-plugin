@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace MrVaco\OrchidBlog\Screens;
+namespace MrVaco\Orchid\Blog\Screens;
 
-use MrVaco\OrchidBlog\Enums\BlogEnums;
-use MrVaco\OrchidBlog\Traits\PostCUTrait;
+use MrVaco\Orchid\Blog\Classes\BlogEnum;
+use MrVaco\Orchid\Blog\Classes\PostCUTrait;
 use Orchid\Screen\Screen;
 
 class PostUpdateScreen extends Screen
@@ -14,6 +14,6 @@ class PostUpdateScreen extends Screen
 
     public function permission(): ?iterable
     {
-        return [BlogEnums::postUpdate];
+        return [BlogEnum::postUpdate];
     }
 }

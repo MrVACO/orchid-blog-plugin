@@ -1,10 +1,9 @@
 <?php
 
-namespace MrVaco\OrchidBlog\Models;
+namespace MrVaco\Orchid\Blog\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use MrVaco\OrchidGalleryPlugin\Models\Gallery;
 use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
@@ -13,7 +12,7 @@ class Post extends Model
 {
     use AsSource, Attachable, Filterable;
 
-    protected $table = 'mr_vaco__blog_posts';
+    protected $table = 'blog_posts';
 
     protected $fillable = [
         'category_id',
@@ -24,41 +23,24 @@ class Post extends Model
         'introductory',
         'content',
         'status',
-        'image',
-        'creator_id',
-        'updator_id',
-        'published_at',
-        'recommended',
-        'gallery_id'
-    ];
-
-    protected $casts = [
-        'category_id'  => 'integer',
-        'status'       => 'integer',
-        'image'        => 'integer',
-        'creator_id'   => 'integer',
-        'updator_id'   => 'integer',
-        'published_at' => 'datetime',
-        'recommended'  => 'boolean',
-        'gallery_id'   => 'integer',
-    ];
-
-    protected array $allowedSorts = [
-        'title',
-        'status',
+        'image_id',
         'recommended',
         'published_at',
-        'created_at',
-        'updated_at',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'category_id' => 'integer',
+            'tags' => 'array',
+            'image_id' => 'integer',
+            'recommended' => 'boolean',
+            'published_at' => 'timestamp',
+        ];
+    }
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
-    }
-
-    public function gallery(): BelongsTo
-    {
-        return $this->belongsTo(Gallery::class, 'gallery_id');
     }
 }

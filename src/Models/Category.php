@@ -1,19 +1,20 @@
 <?php
 
-namespace MrVaco\OrchidBlog\Models;
+namespace MrVaco\Orchid\Blog\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use MrVaco\OrchidStatuses\Classes\StatusClass;
+use MrVaco\Status\Classes\StatusHelper;
+use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
 class Category extends Model
 {
-    use AsSource, Filterable;
+    use AsSource, Attachable, Filterable;
 
-    protected $table = 'mr_vaco__blog_categories';
+    protected $table = 'blog_categories';
 
     protected $fillable = [
         'name',
@@ -22,35 +23,25 @@ class Category extends Model
         'tags',
         'description',
         'status',
-        'image',
-        'creator_id',
-        'updator_id',
-        'hidden',
+        'image_id',
     ];
 
-    protected $casts = [
-        'status'     => 'integer',
-        'creator_id' => 'integer',
-        'updator_id' => 'integer',
-        'hidden'     => 'boolean',
-    ];
-
-    protected array $allowedSorts = [
-        'name',
-        'status',
-        'created_at',
-        'updated_at',
-    ];
-
-    public function scopeActive(Builder $query): Builder
+    protected function casts(): array
     {
-        return $query
-            ->where('status', StatusClass::ACTIVE()->id)
-            ->where('hidden', false);
+        return [
+            'tags' => 'array',
+            'image_id' => 'integer',
+        ];
     }
 
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'category_id');
+    }
+
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query
+            ->where('status', StatusHelper::ACTIVE('base')->id);
     }
 }

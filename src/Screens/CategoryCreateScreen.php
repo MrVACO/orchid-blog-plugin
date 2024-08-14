@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace MrVaco\OrchidBlog\Screens;
+namespace MrVaco\Orchid\Blog\Screens;
 
-use MrVaco\OrchidBlog\Enums\BlogEnums;
-use MrVaco\OrchidBlog\Traits\CategoryCUTrait;
+use MrVaco\Orchid\Blog\Classes\BlogEnum;
+use MrVaco\Orchid\Blog\Classes\CategoryCUTrait;
 use Orchid\Screen\Screen;
 
 class CategoryCreateScreen extends Screen
@@ -14,6 +14,6 @@ class CategoryCreateScreen extends Screen
 
     public function permission(): ?iterable
     {
-        return [BlogEnums::categoryCreate];
+        return [BlogEnum::categoryCreate];
     }
 }
